@@ -1,25 +1,29 @@
 package com.example.hello.entity;
 
+import java.util.ArrayList;
+import java.util.List;
+
+import org.bson.types.ObjectId;
 import org.springframework.data.annotation.Id;
+import org.springframework.data.mongodb.core.index.Indexed;
+import org.springframework.data.mongodb.core.mapping.DBRef;
 import org.springframework.data.mongodb.core.mapping.Document;
 
-@Document
+import com.mongodb.lang.NonNull;
+
+import lombok.Data;
+
+@Document(collection = "user")
+@Data
 public class User {
     @Id
-    private String email;
+    private ObjectId id;
+    @Indexed(unique = true)
+    @NonNull
     private String username;
-
-    public void setEmail(String email) {
-        this.email = email;
-    }
-    public String getEmail() {
-        return email;
-    }
-    public void setUsername(String username) {
-        this.username = username;
-    }
-    public String getUsername() {
-        return username;
-    }
+    @NonNull
+    private String password;
+    @DBRef
+    private List<Blog> blogs = new ArrayList<>();
     
 }

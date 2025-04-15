@@ -23,4 +23,12 @@ public class UserService {
         return userRepository.findAll();
     }
 
+    public User getUserByUsername(String username) {
+        try {
+            return userRepository.findByUsername(username);
+        } catch (Exception e) {
+            return null;
+        }
+    }
+
 }
